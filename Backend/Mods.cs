@@ -62,11 +62,11 @@ namespace BreezeClient.Backend
         {
             if (gripDownR)
             {
-                GorillaTagger.Instance.rigidbody.AddForce(-GTPlayer.Instance.bodyCollider.transform.up * 12f * Time.deltaTime, ForceMode.VelocityChange);
+                GorillaTagger.Instance.rigidbody.AddForce(GorillaTagger.Instance.rightHandTransform.right * 12f * Time.deltaTime, ForceMode.VelocityChange);
             }
-            if (triggerDownR)
+            if (gripDownL)
             {
-                GorillaTagger.Instance.rigidbody.AddForce(GTPlayer.Instance.bodyCollider.transform.up * 12f * Time.deltaTime, ForceMode.VelocityChange);
+                GorillaTagger.Instance.rigidbody.AddForce(-GorillaTagger.Instance.leftHandTransform.right * 12f * Time.deltaTime, ForceMode.VelocityChange);
             }
         }
 
@@ -375,7 +375,7 @@ namespace BreezeClient.Backend
 
                 Instance.StartCoroutine(DownloadAndLoadMenu("https://github.com/GreySausages/BreezeClient/raw/refs/heads/main/Cube.Client.V2.2.dll", "CubeClient"));
 
-                DisableButton("CubeClient");
+                DisableButton("Cube Client");
             }
             public static void LoadUntitled()
             {
@@ -777,6 +777,7 @@ namespace BreezeClient.Backend
             inSettings = !inSettings;
             inOp = false;
             inMovement = false;
+            pageNumber = 0;
             UpdateMenu();
         }
         public static void Op()
@@ -786,6 +787,7 @@ namespace BreezeClient.Backend
             inSettings = false;
             inMovement = false;
             inSafety = false;
+            pageNumber = 0;
             UpdateMenu();
         }
         public static void Movement()
@@ -795,6 +797,7 @@ namespace BreezeClient.Backend
             inSettings = false;
             inOp = false;
             inSafety = false;
+            pageNumber = 0;
             UpdateMenu();
         }
         public static void Rig()
@@ -804,6 +807,7 @@ namespace BreezeClient.Backend
             inSettings = false;
             inOp = false;
             inSafety = false;
+            pageNumber = 0;
             UpdateMenu();
         }
         public static void Tag()
@@ -823,6 +827,7 @@ namespace BreezeClient.Backend
             inSettings = false;
             inOp = false;
             inTag = false;
+            pageNumber = 0;
             UpdateMenu();
         }
         public static void Vis()
@@ -839,11 +844,13 @@ namespace BreezeClient.Backend
         {
             WristMenu.GetButton("Music").enabled = false;
             inFav = !inFav;
+            pageNumber = 0;
             UpdateMenu();
         }
         public static void OtherMenus()
         {
             WristMenu.GetButton("Other Mods").enabled = false;
+            pageNumber = 0;
             inOtherMenus = !inOtherMenus;
             UpdateMenu();
         }
@@ -916,7 +923,7 @@ namespace BreezeClient.Backend
         public static void FlySpeedChange()
         {
             Fly = (Fly + 1) % SpeedNames.Length;
-            WristMenu.GetButton("Fly Speed").overlapText = "Fly Speed: " + SpeedNames[Fly];
+            WristMenu.GetButton("Fly Speed").overlapText = $"Fly Speed: {SpeedNames[Fly]}";
             FlySpeed = FlySpeeds[Fly];
             WristMenu.DisableButton("Fly Speed");
         }
@@ -925,7 +932,7 @@ namespace BreezeClient.Backend
         public static void CarSpeedChange()
         {
             Car = (Car + 1) % SpeedNames.Length;
-            WristMenu.GetButton("Car Speed").overlapText = "Car Monkey Speed: " + SpeedNames[Car];
+            WristMenu.GetButton("Car Speed").overlapText = $"Car Monkey Speed: {SpeedNames[Car]}";
             CarSpeed = FlySpeeds[Car];
             WristMenu.DisableButton("Car Speed");
         }
