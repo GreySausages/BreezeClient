@@ -71,8 +71,8 @@ namespace BreezeClient
                 if (File.Exists(Path.Combine(Paths.GameRootPath, $"Untitled.dll")))
                     File.Delete(Path.Combine(Paths.GameRootPath, $"Untitled.dll"));
 
-                if (File.Exists(Path.Combine(Paths.GameRootPath, $"CosmetX.dll")))
-                    File.Delete(Path.Combine(Paths.GameRootPath, $"CosmetX.dll"));
+                if (File.Exists(Path.Combine(Paths.GameRootPath, $"CubeClient.dll")))
+                    File.Delete(Path.Combine(Paths.GameRootPath, $"CubeClient.dll"));
 
             }
             catch (Exception ex)
