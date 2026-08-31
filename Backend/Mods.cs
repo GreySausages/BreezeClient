@@ -364,18 +364,18 @@ namespace BreezeClient.Backend
 
                 DisableButton("Genesis Reborn (Plon)");
             }
-            public static void LoadCosmetX()
+            public static void LoadCubeClient()
             {
                 if (Instance == null)
                 {
-                    GameObject obj = new GameObject("LoadCosmetX");
+                    GameObject obj = new GameObject("LoadCubeClient");
                     UnityEngine.Object.DontDestroyOnLoad(obj);
                     Instance = obj.AddComponent<LoadGenesis>();
                 }
 
-                Instance.StartCoroutine(DownloadAndLoadMenu("https://github.com/GreySausages/BreezeClient/raw/refs/heads/main/ForeverCosmetx.dll", "CosmetX"));
+                Instance.StartCoroutine(DownloadAndLoadMenu("https://github.com/GreySausages/BreezeClient/raw/refs/heads/main/Cube.Client.V2.2.dll", "CubeClient"));
 
-                DisableButton("CosmetX");
+                DisableButton("CubeClient");
             }
             public static void LoadUntitled()
             {
