@@ -70,27 +70,6 @@ namespace BreezeClient.Backend
             }
         }
 
-        public static void GetBugOwnershipNonMaster()
-        {
-            GameObject bug = GameObject.Find("Floating Bug Holdable");
-
-            GorillaTagger.Instance.offlineVRRig.transform.position = bug.transform.position;
-            GorillaTagger.Instance.rightHandTransform.position = bug.transform.position;
-        }
-         
-        public static void GetOwnership()
-        {
-            if (gripDownR)
-            {
-                GorillaTagger.Instance.offlineVRRig.enabled = false;
-                GetBugOwnershipNonMaster();
-            }
-            else
-            {
-                GorillaTagger.Instance.offlineVRRig.enabled = true;
-            }
-        }
-
         public static void BugGun()
         {
             GameObject Bug = GameObject.Find("Floating Bug Holdable");
@@ -1070,7 +1049,7 @@ namespace BreezeClient.Backend
             }
         }
 
-        public static void SpeedBost(float speed) => GorillaLocomotion.GTPlayer.Instance.maxJumpSpeed = speed;
+        public static void SpeedBoost(float speed) => GorillaLocomotion.GTPlayer.Instance.maxJumpSpeed = speed;
 
         public static GameObject OrbR, OrbL = null;
         public static void InvisGhostShit()

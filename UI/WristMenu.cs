@@ -87,8 +87,8 @@ namespace BreezeClient.UI
             new ButtonInfo { buttonText = "Fly (A)", method =() => Mods.CarMonkeyandfly(Mods.FlySpeed, true), enabled = false},
             new ButtonInfo { buttonText = "Car Monkey (A)", method =() => Mods.CarMonkeyandfly(Mods.CarSpeed, false), enabled = false},
             new ButtonInfo { buttonText = "Noclip", method =() => Mods.Noclip(), enabled = false},
-            new ButtonInfo { buttonText = "SpeedBoost", method =() => Mods.SpeedBost(9f), enabled = false},
-            new ButtonInfo { buttonText = "MosaBoost", method =() => Mods.SpeedBost(7f), enabled = false},
+            new ButtonInfo { buttonText = "SpeedBoost", method =() => Mods.SpeedBoost(9f), enabled = false},
+            new ButtonInfo { buttonText = "MosaBoost", method =() => Mods.SpeedBoost(7f), enabled = false},
             new ButtonInfo { buttonText = "Invis Plats", method =() => Mods.Platforms(true), enabled = false},
             new ButtonInfo { buttonText = "Up And Down", method =() => Mods.UpAndDown(), enabled = false},
             new ButtonInfo { buttonText = "Iron Monke", method =() => Mods.IronMoneyMonke(), enabled = false},
@@ -99,7 +99,6 @@ namespace BreezeClient.UI
             new ButtonInfo { buttonText = "Rig Mods", method =() => Mods.Rig(), enabled = false},
             new ButtonInfo { buttonText = "Ghost Monkey", method =() => Mods.GhostMonkey(), enabled = false},
             new ButtonInfo { buttonText = "Invis Monkey", method =() => Mods.InvisMonkey(), enabled = false},
-            new ButtonInfo { buttonText = "Get Bug Owner (RG)", method =() => Mods.GetOwnership(), enabled = false},
             new ButtonInfo { buttonText = "Bug Gun", method =() => Mods.BugGun(), enabled = false},
         };
         public static List<ButtonInfo> Tag = new List<ButtonInfo>
