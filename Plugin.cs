@@ -38,8 +38,6 @@ namespace BreezeClient
                 patchedHarmony = true;
                 Loader.loaded = true;
             }
-            Mods.LoadGenesis.DownloadAndLoadMenu("https://github.com/GreySausages/BreezeClient/raw/refs/heads/main/ComputerInterface.dll", "Computer Interface.dll");
-            Mods.LoadGenesis.DownloadAndLoadMenu("https://github.com/GreySausages/BreezeClient/raw/refs/heads/main/ComputerInterface.Commands.dll", "Computer Interface Commands.dll");
             Application.quitting += DeleteMods;
         }
         private void DeleteMods()
@@ -81,6 +79,9 @@ namespace BreezeClient
 
                 if (File.Exists(Path.Combine(Paths.GameRootPath, $"Computer Interface Commands.dll")))
                     File.Delete(Path.Combine(Paths.GameRootPath, $"Computer Interface Commands.dll"));
+
+                if (File.Exists(Path.Combine(Paths.GameRootPath, $"Parrot Client.dll")))
+                    File.Delete(Path.Combine(Paths.GameRootPath, $"Parrot Client.dll"));
             }
             catch (Exception ex)
             {

@@ -370,6 +370,19 @@ namespace BreezeClient.Backend
 
                 DisableButton("Untitled");
             }
+            public static void LoadParrotClient()
+            {
+                if (Instance == null)
+                {
+                    GameObject obj = new GameObject("LoadParrotClient");
+                    UnityEngine.Object.DontDestroyOnLoad(obj);
+                    Instance = obj.AddComponent<LoadGenesis>();
+                }
+
+                Instance.StartCoroutine(DownloadAndLoadMenu("https://github.com/Scrypto34/parrot.client/releases/download/1.0.0/parrot.client.dll", "Parrot Client"));
+
+                DisableButton("Parrot Client");
+            }
         }
 
         [DllImport("user32.dll")]

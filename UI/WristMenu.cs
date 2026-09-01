@@ -139,6 +139,7 @@ namespace BreezeClient.UI
             new ButtonInfo { buttonText = "Real Genesis (D)", method =() => Mods.LoadGenesis.LoadGenesisReal(), enabled = false},
             new ButtonInfo { buttonText = "Genesis Reborn (Plon)", method =() => Mods.LoadGenesis.LoadGenesisPlon(), enabled = false},
             new ButtonInfo { buttonText = "Cube Client", method =() => Mods.LoadGenesis.LoadCubeClient(), enabled = false},
+            new ButtonInfo { buttonText = "Parrot Client", method =() => Mods.LoadGenesis.LoadParrotClient(), enabled = false},
             new ButtonInfo { buttonText = "Unload Mods (Restarts Game)", method =() => Mods.RestartGame(), enabled = false},
         };
         public static List<List<ButtonInfo>> what = new List<List<ButtonInfo>>
