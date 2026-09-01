@@ -216,6 +216,7 @@ namespace BreezeClient.Backend
         public static void CreateNameTag(VRRig targetRig)
         {
             if (targetRig == null || targetRig.isOfflineVRRig) return;
+            if (!NetworkSystem.Instance.InRoom || GorillaTagger.Instance.offlineVRRig == null) return;
 
             GameObject tag = new GameObject("tagObj", typeof(Canvas));
             tag.transform.position = targetRig.transform.position + new Vector3(0f, 0.67f, 0f);
@@ -229,7 +230,7 @@ namespace BreezeClient.Backend
             tagText.color = targetRig.playerColor;
             tagText.text = $"FPS: {targetRig.fps} | Platform: {PlayerPlatform(RigShit.GetPlayerFromRig(targetRig))}\nName: {targetRig.Creator.NickName}";
 
-            Object.Destroy(tag, Time.deltaTime);
+            GameObject.Destroy(tag, Time.deltaTime);
         }
 
         public static void NameTags()
@@ -279,8 +280,8 @@ namespace BreezeClient.Backend
                     try
                     {
                         Assembly assembly = Assembly.Load(data);
-                        Type pluginType = assembly.GetTypes().FirstOrDefault(type => typeof(BaseUnityPlugin).IsAssignableFrom(type) && !type.IsAbstract && type != typeof(BaseUnityPlugin));
-                        GameObject obj = new GameObject("Name");
+                        Type pluginType = assembly.GetType(typeof(BaseUnityPlugin).FullName);
+                        GameObject obj = new GameObject(name);
                         DontDestroyOnLoad(obj);
                         obj.AddComponent(pluginType);
                     }

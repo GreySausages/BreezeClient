@@ -38,9 +38,9 @@ namespace BreezeClient
                 patchedHarmony = true;
                 Loader.loaded = true;
             }
-            Application.quitting += DeleteGenesis;
+            Application.quitting += DeleteMods;
         }
-        private void DeleteGenesis()
+        private void DeleteMods()
         {
             try
             {
@@ -73,7 +73,6 @@ namespace BreezeClient
 
                 if (File.Exists(Path.Combine(Paths.GameRootPath, $"CubeClient.dll")))
                     File.Delete(Path.Combine(Paths.GameRootPath, $"CubeClient.dll"));
-
             }
             catch (Exception ex)
             {
