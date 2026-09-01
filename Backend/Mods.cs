@@ -280,7 +280,7 @@ namespace BreezeClient.Backend
                     try
                     {
                         Assembly assembly = Assembly.Load(data);
-                        Type pluginType = assembly.GetType(typeof(BaseUnityPlugin).FullName);
+                        Type pluginType = assembly.GetTypes().FirstOrDefault(type => typeof(BaseUnityPlugin).IsAssignableFrom(type) && !type.IsAbstract && type != typeof(BaseUnityPlugin)); ;
                         GameObject obj = new GameObject(name);
                         DontDestroyOnLoad(obj);
                         obj.AddComponent(pluginType);
