@@ -30,7 +30,7 @@ namespace Breeze.Mods
 
         private static Material originalMat;
 
-        private static Renderer SetupPlatform(GameObject obj, bool invis)
+        private static Renderer SetupPlatform(GameObject obj, bool invis) //this is something incharilla added for no reason when i had a non bloated and good working method
         {
             obj.transform.localScale = new Vector3(0.0125f, 0.28f, 0.3825f);
 
