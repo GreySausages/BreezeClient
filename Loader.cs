@@ -5,11 +5,17 @@ namespace Loading
 {
     public class Loader
     {
+        public static GameObject g = null;
         public static void Load()
         {
-            GameObject go = new GameObject("wa");
-            UnityEngine.Object.DontDestroyOnLoad(go);
-            go.AddComponent<Breeze.HarmonyPatches>();
+            g = new GameObject("wa");
+            UnityEngine.Object.DontDestroyOnLoad(g);
+            g.AddComponent<Breeze.HarmonyPatches>();
+        }
+        public static void Unload()
+        {
+            GameObject.Destroy(g);
+            g = null;
         }
     }
 }

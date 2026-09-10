@@ -190,14 +190,18 @@ namespace Breeze.Mods
         public static VRRig selfrig = GorillaTagger.Instance.offlineVRRig;
         public static void LongArms()
         {
-            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+            if (ControllerInputPoller.instance.rightControllerTriggerButton)
             {
-                GorillaLocomotion.GTPlayer.Instance.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                GorillaLocomotion.GTPlayer.Instance.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
             }
-            if (ControllerInputPoller.instance.rightControllerSecondaryButton)
+            if (ControllerInputPoller.instance.leftControllerTriggerButton)
             {
-                GorillaLocomotion.GTPlayer.Instance.transform.localScale = new Vector3(1f, 1f, 1f);
+                GorillaLocomotion.GTPlayer.Instance.transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f);
             }
+        }
+        public static void NoLongArms()
+        {
+            GorillaLocomotion.GTPlayer.Instance.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         public static void SpeedBoost(float a) => GorillaLocomotion.GTPlayer.Instance.maxJumpSpeed = a;
 
