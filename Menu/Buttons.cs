@@ -87,8 +87,6 @@ namespace Breeze.Menu
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
                 new ButtonInfo { buttonText = "Water Splash Hands", method =() => Fun.WaterSplashHands(), isTogglable = true },
                 new ButtonInfo { buttonText = "Metal Spam", method =() => Fun.SoundSpam(), isTogglable = true },
-                new ButtonInfo { buttonText = "Loud Hand Taps", method =() => Rig.LoudHandTaps(), disableMethod =() => Rig.NormalHandTaps(),    isTogglable = true },
-                new ButtonInfo { buttonText = "Fast Hand Taps", method =() => Rig.FastHandTaps(), disableMethod =() => Rig.NormalSpeedHandTaps(), isTogglable = true },
             },
             new ButtonInfo[] { // Parter_Menus [9]
                 new ButtonInfo { buttonText = "Retrurn to Main", method =() => buttonsType = 0, isTogglable = false },
