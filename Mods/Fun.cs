@@ -11,7 +11,7 @@ namespace Breeze.Mods
     {
         public static void SoundSpam(int id = 18)
         {
-            if ((!NetworkSystem.Instance.InRoom || !ControllerInputPoller.instance.rightControllerTriggerButton) && Time.time > rpccooldown + 0.1f) { rpccooldown = Time.time; return; } // I felt like doin the cooldown like this instead of the way i do it in the water splash hand bc idrk
+            if ((!NetworkSystem.Instance.InRoom || !ControllerInputPoller.instance.rightControllerTriggerButton) && Time.time < rpccooldown + 0.1f) return; // I felt like doin the cooldown like this instead of the way i do it in the water splash hand bc idrk
 
             GorillaTagger.Instance.myVRRig.SendRPC("RPC_PlayHandTap", RpcTarget.All, new object[]
             {
@@ -20,6 +20,7 @@ namespace Breeze.Mods
                 999f
             });
             Move.RPCProt();
+            rpccooldown = Time.time;
         }
 
         public static float rpccooldown = 0f;
@@ -32,7 +33,10 @@ namespace Breeze.Mods
                     GorillaTagger.Instance.myVRRig.SendRPC("RPC_PlaySplashEffect", RpcTarget.All, new object[]
                     {
                         GorillaTagger.Instance.rightHandTransform.position,
-                        4f, 100f, false ,true
+                        4f, 
+                        100f,
+                        false,
+                        true
                     });
                 }
                 if (ControllerInputPoller.instance.leftControllerTriggerButton)
@@ -40,7 +44,10 @@ namespace Breeze.Mods
                     GorillaTagger.Instance.myVRRig.SendRPC("RPC_PlaySplashEffect", RpcTarget.All, new object[]
                     {
                         GorillaTagger.Instance.leftHandTransform.position,
-                        4f, 100f, false ,true
+                        4f, 
+                        100f, 
+                        false,
+                        true
                     });
                 }
                 rpccooldown = Time.time;

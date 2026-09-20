@@ -48,7 +48,11 @@ namespace Breeze.Mods
         }
         public static void LoudHandTaps() => GorillaTagger.Instance.handTapVolume = 999f;
         public static void NormalHandTaps() => GorillaTagger.Instance.handTapVolume = 0.1f;
-        public static void FastHandTaps() => GorillaTagger.Instance.tapCoolDown = 999f;
+        public static void FastHandTaps()
+        {
+            GorillaTagger.Instance.tapCoolDown = 0.01f;
+            Move.RPCProt();
+        }
         public static void NormalSpeedHandTaps() => GorillaTagger.Instance.tapCoolDown = 0.15f;
         public static void InvisMonkey()
         {
@@ -59,9 +63,7 @@ namespace Breeze.Mods
                 InvisGhostOrbs();
             }
             else
-            {
                 GorillaTagger.Instance.offlineVRRig.enabled = true;
-            }
         }
     }
 }

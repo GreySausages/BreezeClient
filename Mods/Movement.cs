@@ -125,55 +125,6 @@ namespace Breeze.Mods
             PhotonNetwork.SendAllOutgoingCommands();
         }
 
-        public static float Shittymethod;
-        public static void LagAllOP(float delay, int howmany)
-        {
-            if (Time.time > delay)
-            {
-                for (int i = 0; i < howmany; i++)
-                {
-                    PhotonNetwork.NetworkingClient.OpRaiseEvent(202, new object[]
-                    {
-                        "AHHHHH"
-                    }, new RaiseEventOptions
-                    {
-                        Receivers = ReceiverGroup.Others
-                    },SendOptions.SendUnreliable);
-                    RPCProt();
-                }
-
-                delay = Time.time + delay;
-            }
-        }
-        public static void LaggunOP(float delay, int howmany)
-        {
-            Gunlib.StartBothGuns(() =>
-            {
-                if (Time.time > delay)
-                {
-                    for (int i = 0; i < howmany; i++)
-                    {
-                        PhotonNetwork.NetworkingClient.OpRaiseEvent(202, new object[]
-                        {
-                            "Get Fucked Gorilla Tag"
-                        }, new RaiseEventOptions
-                        {
-                            TargetActors = new int[]
-                            {
-                                Gunlib.LockedPlayer.Creator.ActorNumber
-                            }
-                        },
-                            SendOptions.SendUnreliable
-                        );
-                        RPCProt();
-                    }
-
-                    delay = Time.time + delay;
-                }
-            }, true);
-        }
-
-        private static bool GrabRigButton = ControllerInputPoller.instance.rightGrab;
         public static void GrabRig()
         {
             if (ControllerInputPoller.instance.rightGrab)
@@ -285,6 +236,20 @@ namespace Breeze.Mods
             }
         }
 
+        public static void no()
+        {
+            if (ControllerInputPoller.instance.rightControllerIndexFloat > 0.1)
+            {
+                GorillaLocomotion.GTPlayer.Instance.transform.position += GorillaLocomotion.GTPlayer.Instance.bodyCollider.transform.up * Time.deltaTime * 9f;
+                GorillaLocomotion.GTPlayer.Instance.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            }
+            if (ControllerInputPoller.instance.leftControllerIndexFloat > 0.1)
+            {
+                GorillaLocomotion.GTPlayer.Instance.transform.position += GorillaLocomotion.GTPlayer.Instance.bodyCollider.transform.up * Time.deltaTime * 9f;
+                GorillaLocomotion.GTPlayer.Instance.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            }
+        }
+
         public static float Yaw = -1f;
         public static float Pitch = -1f;
         public static float anchorX;
@@ -362,7 +327,7 @@ namespace Breeze.Mods
             }
         }
 
-        private static bool HasTeleported;
+        private static bool HasTeleported = false;
         public static void TPGun()
         {
             Advantages.Gunlib(() =>

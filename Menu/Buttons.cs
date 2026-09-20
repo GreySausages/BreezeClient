@@ -56,6 +56,7 @@ namespace Breeze.Menu
                 new ButtonInfo { buttonText = "Iron Monkey [RG & LG]", method =() => Move.IronMoneyMonke(), isTogglable = true },
                 new ButtonInfo { buttonText = "TPGun", method =() => Move.TPGun(), isTogglable = true },
                 new ButtonInfo { buttonText = "WASD Fly", method =() => Move.WASDFly(), isTogglable = true },
+                new ButtonInfo { buttonText = "Up And Down", method =() => Move.no(), isTogglable = true },
             },
             new ButtonInfo[] { // Advantages [5]
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
@@ -69,7 +70,7 @@ namespace Breeze.Menu
             },
             new ButtonInfo[] { // VRRig [6]
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
-                new ButtonInfo { buttonText = "Long Arms", method =() => Move.LongArms(), isTogglable = true },
+                new ButtonInfo { buttonText = "Long Arms", method =() => Move.LongArms(), disableMethod =() => Move.NoLongArms(), isTogglable = true },
                 new ButtonInfo { buttonText = "Ghost Monkey", method =() => Rig.GhostMonkey(), isTogglable = true },
                 new ButtonInfo { buttonText = "Invis Monkey", method =() => Rig.InvisMonkey(), isTogglable = true },
                 new ButtonInfo { buttonText = "Grab Rig [RG]", method =() => Move.GrabRig(), isTogglable = true },
@@ -86,6 +87,8 @@ namespace Breeze.Menu
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
                 new ButtonInfo { buttonText = "Water Splash Hands", method =() => Fun.WaterSplashHands(), isTogglable = true },
                 new ButtonInfo { buttonText = "Metal Spam", method =() => Fun.SoundSpam(), isTogglable = true },
+                new ButtonInfo { buttonText = "Loud Hand Taps", method =() => Rig.LoudHandTaps(), disableMethod =() => Rig.NormalHandTaps(),    isTogglable = true },
+                new ButtonInfo { buttonText = "Fast Hand Taps", method =() => Rig.FastHandTaps(), disableMethod =() => Rig.NormalSpeedHandTaps(), isTogglable = true },
             },
             new ButtonInfo[] { // Parter_Menus [9]
                 new ButtonInfo { buttonText = "Retrurn to Main", method =() => buttonsType = 0, isTogglable = false },

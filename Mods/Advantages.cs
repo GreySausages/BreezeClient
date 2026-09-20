@@ -126,20 +126,14 @@ namespace Breeze.Mods
                         pointer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                         UnityEngine.Object.Destroy(pointer.GetComponent<Rigidbody>());
                         UnityEngine.Object.Destroy(pointer.GetComponent<SphereCollider>());
-                        pointer.GetComponent<Renderer>().material.color = Color.red;
                         pointer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     }
                     pointer.transform.position = hitInfo.point;
                     if (ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f || Mouse.current.leftButton.isPressed)
-                    {
                         mod1?.Invoke();
-                        pointer.GetComponent<Renderer>().material.color = Color.green;
-                    }
                     else
-                    {
                         mod2?.Invoke();
-                        pointer.GetComponent<Renderer>().material.color = Color.red;
-                    }
+                    pointer.GetComponent<Renderer>().material.color = ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f ? Color.green : Color.red;
                 }
                 else
                 {
@@ -180,15 +174,10 @@ namespace Breeze.Mods
                     }
                     pointer.transform.position = hitInfo.point;
                     if (Mouse.current.leftButton.isPressed)
-                    {
-                        pointer.GetComponent<Renderer>().material.color = Color.green;
                         mod1();
-                    }
                     else
-                    {
-                        pointer.GetComponent<Renderer>().material.color = Color.red;
                         mod2();
-                    }
+                    pointer.GetComponent<Renderer>().material.color = Mouse.current.leftButton.isPressed ? Color.green : Color.red;
                 }
             }
             else
@@ -202,8 +191,6 @@ namespace Breeze.Mods
 
         public static void SendOPRaiseEvent202(VRRig p = null)
         {
-            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-            hashtable[0] = p.Creator.ActorNumber;
             RaiseEventOptions options;
             if (p != null)
             {
@@ -222,7 +209,7 @@ namespace Breeze.Mods
                     Receivers = ReceiverGroup.Others
                 };
             }
-            PhotonNetwork.NetworkingClient.OpRaiseEvent(202, hashtable, options, SendOptions.SendUnreliable);
+            PhotonNetwork.NetworkingClient.OpRaiseEvent(202, new Hashtable(), options, SendOptions.SendUnreliable);
             Move.RPCProt();
         }
 
@@ -248,25 +235,13 @@ namespace Breeze.Mods
             });
         }
 
-        public static void SendOPRaiseEvent202All()
-        {
-            PhotonNetwork.NetworkingClient.OpRaiseEvent(202, new object[]
-            {
-                "Hello Gorilla TAG!!!"
-            }, new RaiseEventOptions
-            {
-                Receivers = ReceiverGroup.Others
-            }, SendOptions.SendUnreliable);
-            Move.RPCProt();
-        }
-
         public static void LagAll(float delay, int howmany)
         {
             if (Time.time > LagCooldown)
             {
                 for (int i = 0; i < howmany; i++)
                 {
-                    SendOPRaiseEvent202All();
+                    SendOPRaiseEvent202();
                 }
                 LagCooldown = Time.time + delay;
             }

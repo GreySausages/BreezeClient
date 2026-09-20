@@ -37,7 +37,6 @@ namespace Breeze
             "Blue",
             "Red",
             "Orange",
-            "Blue 2",
         };
 
         public static void ThemeChanger()
@@ -172,30 +171,6 @@ namespace Breeze
                 {
                     colors = GetSolidGradient(new Color(1f, 0.5f, 0f))
                 };
-                if (themeindex == 6)
-                {
-                    if (buttonColors[0] != new ExtGradient { colors = GetSolidGradient(new Color(0.9f, 0.4f, 0f)) }) RecreateMenu();
-                    buttonColors = new ExtGradient[]
-                    {
-                    new ExtGradient
-                    {
-                        colors = GetSolidGradient(Color.blue)
-                    },
-                    new ExtGradient
-                    {
-                        colors = GetSolidGradient(Color.blue)
-                    }
-                    };
-                    backgroundColor = new ExtGradient
-                    {
-                        colors = GetSolidGradient(Color.blue)
-                    };
-                    textColors = new Color[]
-                    {
-                        Color.white,
-                        Color.magenta
-                }   ;
-                }
             }
         }
 
