@@ -14,9 +14,10 @@ namespace Breeze.Mods
 {
     public class Mod_Loading : MonoBehaviour
     {
+        public static Mod_Loading Instance { get; private set; }
         public static IEnumerator DownloadAndLoadMod(string DownloadLink, string name = "Genesis")
         {
-            string path = Path.Combine(Paths.GameRootPath + $"{name}.dll");
+            string path = Path.Combine(Paths.PluginPath + $"{name}.dll");
 
             using (UnityWebRequest a = UnityWebRequest.Get(DownloadLink))
             {
@@ -36,8 +37,13 @@ namespace Breeze.Mods
 
         public static void LoadGenesis()
         {
-            Mod_Loading mod_Loading = new Mod_Loading();
-            mod_Loading.StartCoroutine(DownloadAndLoadMod("https://github.com/incharilla1/ShibaGT-Genesis-Reborn/releases/latest/download/ShibaGTGenesisReborn.dll"));
+            if (Instance == null)
+            {
+                GameObject obj = new GameObject("Mod_Loading");
+                DontDestroyOnLoad(obj);
+                Instance = obj.AddComponent<Mod_Loading>();
+            }
+            Instance.StartCoroutine(DownloadAndLoadMod("https://github.com/incharilla1/ShibaGT-Genesis-Reborn/releases/latest/download/ShibaGTGenesisReborn.dll"));
         }
     }
 }

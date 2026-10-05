@@ -189,7 +189,7 @@ namespace Breeze.Mods
             }
         }
 
-        public static void SendOPRaiseEvent202(VRRig p = null)
+        public static void SendOPRaiseEvent(VRRig p = null)
         {
             RaiseEventOptions options;
             if (p != null)
@@ -209,7 +209,7 @@ namespace Breeze.Mods
                     Receivers = ReceiverGroup.Others
                 };
             }
-            PhotonNetwork.NetworkingClient.OpRaiseEvent(202, new Hashtable(), options, SendOptions.SendUnreliable);
+            PhotonNetwork.NetworkingClient.OpRaiseEvent(72, new Hashtable(), options, SendOptions.SendUnreliable);
             Move.RPCProt();
         }
 
@@ -224,7 +224,7 @@ namespace Breeze.Mods
                     {
                         if (LockedPlayer != null)
                         {
-                            SendOPRaiseEvent202(LockedPlayer);
+                            SendOPRaiseEvent(LockedPlayer);
                         }
                     }
                     LagCooldown = Time.time + delay;
@@ -241,7 +241,7 @@ namespace Breeze.Mods
             {
                 for (int i = 0; i < howmany; i++)
                 {
-                    SendOPRaiseEvent202();
+                    SendOPRaiseEvent();
                 }
                 LagCooldown = Time.time + delay;
             }

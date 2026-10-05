@@ -119,11 +119,11 @@ namespace Breeze.Menu
                 return;
 
             StumpObj = new GameObject("STUMPOBJ");
-            TextMeshPro textobj = StumpObj.AddComponent<TextMeshPro>();
-            textobj.text = "<color=cyan>Breeze</color>";
+            TextMeshPro textobj =  StumpObj.AddComponent<TextMeshPro>();
+            textobj.text = "Breeze";
             textobj.fontSize = 2f;
             textobj.alignment = TextAlignmentOptions.Center;
-            textobj.color = Color.blue;
+            textobj.color = Color.cyan;
             Destroy(StumpObj, Time.deltaTime);
             Transform shit = StumpObj.transform;
             shit.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
@@ -131,7 +131,7 @@ namespace Breeze.Menu
             shit.LookAt(Camera.main.transform.position);
             shit.Rotate(0f, 180f, 0f);
         }
-
+         
         public static void RoundMenuObject(GameObject toRound, float bevel = 0.02f)
         {
             if (toRound.transform.parent != menu?.transform)
@@ -728,7 +728,6 @@ namespace Breeze.Menu
                     }
                 }
             }
-
             return null;
         }
 
