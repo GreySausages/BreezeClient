@@ -43,7 +43,8 @@ namespace Breeze.Menu
             new ButtonInfo[] { // Room [3]
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
                 new ButtonInfo { buttonText = "Disconnect", method =() => Room.Disconnect(), isTogglable = false },
-                new ButtonInfo { buttonText = $"SaveRoom: {Room.room}", method =() => Room.SaveRoom(), isTogglable = false },
+                new ButtonInfo { buttonText = "Join Random", method =() => Room.JoinRandom(), isTogglable = false },
+                new ButtonInfo { buttonText = "SaveRoom:", overlapText = "SaveRoom: ", method =() => Room.SaveRoom(), isTogglable = false },
                 new ButtonInfo { buttonText = "Join Saved Room", method =() => Room.JoinSavedRoom(), isTogglable = false },
             },
             new ButtonInfo[] { // Movement [4]

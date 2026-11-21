@@ -1,4 +1,5 @@
-﻿using GorillaNetworking;
+﻿using Breeze.Menu;
+using GorillaNetworking;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -16,6 +17,7 @@ namespace Breeze.Mods
         {
             if (!PhotonNetwork.InRoom) return;
             room = PhotonNetwork.CurrentRoom.Name;
+            Main.GetIndex("SaveRoom:").overlapText = room;
         }
         public static void JoinSavedRoom()
         {
@@ -25,6 +27,19 @@ namespace Breeze.Mods
         public static void Disconnect()
         {
             PhotonNetwork.Disconnect();
+        }
+
+        public static string zone = null;
+        public static void JoinRandom()
+        {
+            if (zone == null)
+            {
+                zone = GTZone.forest.ToString();
+            }
+            if (!NetworkSystem.Instance.InRoom)
+            {
+                PhotonNetworkController.Instance.AttemptToJoinPublicRoom(GorillaComputer.instance.GetJoinTriggerForZone(zone), GorillaNetworking.JoinType.Solo);
+            }
         }
 
         public static Player GetPlayerFromRig(VRRig rig)

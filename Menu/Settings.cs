@@ -1,6 +1,6 @@
-
 ﻿using Breeze.Classes;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Breeze.Menu.Main;
 
 namespace Breeze
@@ -38,7 +38,9 @@ namespace Breeze
             "Blue",
             "Red",
             "Orange",
+            "Purple",
         };
+   
 
         public static void ThemeChanger()
         {
@@ -173,6 +175,25 @@ namespace Breeze
                     colors = GetSolidGradient(new Color(1f, 0.5f, 0f))
                 };
             }
+            if (themeindex == 6)
+            {
+                if (buttonColors[0] != new ExtGradient { colors = GetSolidGradient(new Color(0.355f, 0f, 0.9f)) }) RecreateMenu();
+                buttonColors = new ExtGradient[]
+                {
+                    new ExtGradient
+                    {
+                        colors = GetSolidGradient(new Color(0.355f, 0f, 0.9f))
+                    },
+                    new ExtGradient
+                    {
+                        colors = GetSolidGradient(new Color(0.455f, 0f, 1f))
+                    }
+                };
+                backgroundColor = new ExtGradient
+                {
+                    colors = GetSolidGradient(new Color(0.455f, 0f, 1f))
+                };
+            }
         }
 
         public static Font currentFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
@@ -188,5 +209,4 @@ namespace Breeze
         public static Vector3 menuSize = new Vector3(0.1f, 1f, 1f); // Depth, Width, Height
         public static int buttonsPerPage = 8;
     }
-
 }
