@@ -77,7 +77,6 @@ namespace Breeze.Mods
         {
             if (GTPlayer.Instance == null || VRRig.LocalRig == null) return;
             GTPlayer.Instance.isHoverAllowed = true;
-            FreeHoverboardManager.instance.SendDropBoardRPC(GorillaTagger.Instance.rightHandTransform.position, Quaternion.identity, Vector3.zero, Vector3.zero, VRRig.LocalRig.playerColor);
             GTPlayer.Instance.SetHoverActive(true);
         }
 
