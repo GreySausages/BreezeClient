@@ -38,7 +38,7 @@ namespace Breeze.Menu
             new ButtonInfo[] { // Important/Safety [2]
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
                 new ButtonInfo { buttonText = "Anti Report", method =() => Important.AntiReport(), isTogglable = true, enabled = true },
-                new ButtonInfo { buttonText = "RPCProt", method =() => Move.RPCProt(), isTogglable = true, enabled = true },
+                new ButtonInfo { buttonText = "RPC Prot", method =() => Move.RPCProt(), isTogglable = true, enabled = true },
             },
             new ButtonInfo[] { // Room [3]
                 new ButtonInfo { buttonText = "Return to Main", method =() => buttonsType = 0, isTogglable = false },
