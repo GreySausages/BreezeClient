@@ -19,6 +19,8 @@ namespace Breeze.Menu
     public class Main : MonoBehaviour
     {
         public static bool hi = false;
+        public static bool gripDownR = false;
+        public static bool triggerDownR = false;
         // Constant
         public static void Prefix()
         {
@@ -26,6 +28,8 @@ namespace Breeze.Menu
             try
             {
                 bool toOpen = ControllerInputPoller.instance.leftControllerSecondaryButton;
+                triggerDownR = ControllerInputPoller.instance.rightControllerTriggerButton;
+                gripDownR = ControllerInputPoller.instance.rightGrab;
                 bool keyboardOpen = UnityInput.Current.GetKey(KeyCode.LeftAlt);
 
                 if (menu == null)

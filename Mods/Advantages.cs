@@ -83,106 +83,88 @@ namespace Breeze.Mods
         public static VRRig LockedPlayer = null;
         public static bool LockOn = true;
         public static GameObject pointer = null;
-        public static void Gunlib(Action mod1, Action mod2 = null)
+        public static int NoBarrier()
         {
-            bool isVr = !Mouse.current.rightButton.isPressed;
-            if (ControllerInputPoller.instance.rightGrab || Mouse.current.rightButton.isPressed)
+            return ~((IEnumerable<string>)new string[] { "TransparentFX", "Ignore Raycast", "Zone", "Gorilla Trigger", "Gorilla Boundary", "GorillaCosmetics", "GorillaParticle" }).Select((Func<string, int>)LayerMask.NameToLayer).Aggregate(0, (int num, int l) => num | (1 << l));
+        }
+        public static void Gunlib(Action mod, Action mod2 = null)
+        {
+            if (Main.gripDownR)
             {
-                GameObject shoulderObj = GameObject.Find("Shoulder Camera");
-                Camera cam = shoulderObj != null ? shoulderObj.GetComponent<Camera>() : null;
-                Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-                if (isVr)
+                Physics.Raycast(GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.position, -GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.up, out var hitInfo, 100f, NoBarrier());
+                if (Mouse.current.rightButton.isPressed)
                 {
-                    Physics.Raycast(GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.position - GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.up, -GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.up, out var hitInfo);
-                    if (LockOn)
-                    {
-                        if (LockedPlayer == null && ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f)
-                        {
-                            LockedPlayer = hitInfo.collider?.GetComponentInParent<VRRig>();
-                        }
-                        else if (LockedPlayer != null && ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f)
-                        {
-                            hitInfo.point = LockedPlayer.transform.position;
-                        }
-                        else if (LockedPlayer != null && ControllerInputPoller.instance.rightControllerIndexFloat < 0.1f)
-                        {
-                            LockedPlayer = null;
-                        }
-                    }
-                    else
-                    {
-                        if (LockedPlayer == null && ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f)
-                        {
-                            LockedPlayer = hitInfo.collider?.GetComponentInParent<VRRig>();
-                        }
-                        else if (LockedPlayer != null && hitInfo.collider?.GetComponentInParent<VRRig>() == null)
-                        {
-                            LockedPlayer = null;
-                        }
-                    }
-                    if (pointer == null)
-                    {
-                        pointer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        UnityEngine.Object.Destroy(pointer.GetComponent<Rigidbody>());
-                        UnityEngine.Object.Destroy(pointer.GetComponent<SphereCollider>());
-                        pointer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                    }
-                    pointer.transform.position = hitInfo.point;
-                    if (ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f || Mouse.current.leftButton.isPressed)
-                        mod1?.Invoke();
-                    else
-                        mod2?.Invoke();
-                    pointer.GetComponent<Renderer>().material.color = ControllerInputPoller.instance.rightControllerIndexFloat > 0.1f ? Color.green : Color.red;
+                    Camera cam = GameObject.Find("Shoulder Camera").GetComponent<Camera>();
+                    Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+                    Physics.Raycast(ray, out hitInfo, 100f, NoBarrier());
+                }
+                if (LockOn)
+                {
+                    if (LockedPlayer == null && Main.triggerDownR)
+                        LockedPlayer = hitInfo.collider?.GetComponentInParent<VRRig>();
+                    else if (LockedPlayer != null && Main.triggerDownR)
+                        hitInfo.point = LockedPlayer.transform.position;
+                    else if (LockedPlayer != null && !Main.triggerDownR)
+                        LockedPlayer = null;
                 }
                 else
                 {
-                    Physics.Raycast(ray.origin, ray.direction, out var hitInfo, 100f);
-                    if (LockOn)
+                    if (LockedPlayer == null && Main.triggerDownR)
                     {
-                        if (LockedPlayer == null && Mouse.current.leftButton.isPressed)
-                        {
-                            LockedPlayer = hitInfo.collider?.GetComponentInParent<VRRig>();
-                        }
-                        else if (LockedPlayer != null && Mouse.current.leftButton.isPressed)
-                        {
-                            hitInfo.point = LockedPlayer.transform.position;
-                        }
-                        else if (LockedPlayer != null && !Mouse.current.leftButton.isPressed)
-                        {
-                            LockedPlayer = null;
-                        }
+                        LockedPlayer = hitInfo.collider?.GetComponentInParent<VRRig>();
                     }
-                    else if (!LockOn)
+                    else if (LockedPlayer != null && hitInfo.collider?.GetComponentInParent<VRRig>() == null)
                     {
-                        if (LockedPlayer == null && Mouse.current.leftButton.isPressed)
-                        {
-                            LockedPlayer = hitInfo.collider?.GetComponentInParent<VRRig>();
-                        }
-                        else if (LockedPlayer != null && hitInfo.collider?.GetComponentInParent<VRRig>() == null)
-                        {
-                            LockedPlayer = null;
-                        }
+                        LockedPlayer = null;
                     }
-                    if (pointer == null)
-                    {
-                        pointer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        UnityEngine.Object.Destroy(pointer.GetComponent<Rigidbody>());
-                        UnityEngine.Object.Destroy(pointer.GetComponent<SphereCollider>());
-                        pointer.GetComponent<Renderer>().material.color = Color.red;
-                        pointer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                    }
-                    pointer.transform.position = hitInfo.point;
-                    if (Mouse.current.leftButton.isPressed)
-                        mod1();
-                    else
-                        mod2();
-                    pointer.GetComponent<Renderer>().material.color = Mouse.current.leftButton.isPressed ? Color.green : Color.red;
+                }
+                if (pointer == null)
+                {
+                    pointer = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    GameObject.Destroy(pointer.GetComponent<Rigidbody>());
+                    GameObject.Destroy(pointer.GetComponent<SphereCollider>());
+                    pointer.GetComponent<Renderer>().material.color = Color.red;
+                    pointer.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                }
+                pointer.transform.position = hitInfo.point;
+                if (Main.triggerDownR)
+                {
+                    pointer.GetComponent<Renderer>().material.color = Color.green;
+                    GameObject g = new GameObject("Line");
+                    LineRenderer l = g.AddComponent<LineRenderer>();
+                    l.startWidth = 0.01f;
+                    l.endWidth = 0.01f;
+                    l.positionCount = 2;
+                    l.useWorldSpace = true;
+                    l.SetPosition(0, GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.position);
+                    l.SetPosition(1, hitInfo.point);
+                    l.material.shader = Shader.Find("Sprites/Default");
+                    l.startColor = Color.green;
+                    l.endColor = Color.green;
+                    GameObject.Destroy(l, Time.deltaTime);
+                    mod.Invoke();
+                }
+                else if (!Main.triggerDownR)
+                {
+                    pointer.GetComponent<Renderer>().material.color = Color.red;
+                    GameObject g = new GameObject("Line");
+                    LineRenderer l = g.AddComponent<LineRenderer>();
+                    l.startWidth = 0.01f;
+                    l.endWidth = 0.01f;
+                    l.positionCount = 2;
+                    l.useWorldSpace = true;
+                    l.SetPosition(0, GorillaLocomotion.GTPlayer.Instance.RightHand.controllerTransform.position);
+                    l.SetPosition(1, hitInfo.point);
+                    l.material.shader = Shader.Find("Sprites/Default");
+                    l.startColor = Color.red;
+                    l.endColor = Color.red;
+                    GameObject.Destroy(l, Time.deltaTime);
+                    mod2?.Invoke();
                 }
             }
             else
             {
-                pointer.GetComponent<Renderer>().material.color = Color.red;
-                mod2();
+                mod2?.Invoke();
                 GameObject.Destroy(pointer);
                 pointer = null;
             }
