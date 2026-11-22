@@ -39,6 +39,7 @@ namespace Breeze
             "Red",
             "Orange",
             "Purple",
+            "Pink",
         };
    
 
@@ -192,6 +193,25 @@ namespace Breeze
                 backgroundColor = new ExtGradient
                 {
                     colors = GetSolidGradient(new Color(0.455f, 0f, 1f))
+                };
+            }
+            if (themeindex == 7)
+            {
+                if (buttonColors[0] != new ExtGradient { colors = GetSolidGradient(new Color(1f, 0f, 1f)) }) RecreateMenu();
+                buttonColors = new ExtGradient[]
+                {
+                    new ExtGradient
+                    {
+                        colors = GetSolidGradient(new Color(0.9f, 0f, 0.9f))
+                    },
+                    new ExtGradient
+                    {
+                        colors = GetSolidGradient(new Color(1f, 0f, 1f))
+                    }
+                };
+                backgroundColor = new ExtGradient
+                {
+                    colors = GetSolidGradient(new Color(1f, 0f, 1f))
                 };
             }
         }
